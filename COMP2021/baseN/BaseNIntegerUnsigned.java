@@ -31,30 +31,35 @@ public class BaseNIntegerUnsigned {
     /**
      * Instantiate an NBasedIntegerUnsigned. Throws IllegalArgumentException if 'base' or 'magnitude' is invalid.
      */
-    public BaseNIntegerUnsigned(String magnitude, int base) {
-        if(!isValidMagnitude(magnitude, base))
-            throw new IllegalArgumentException();
-
-        // Add missing code here.
+    public BaseNIntegerUnsigned(String magnitude, int base) 
+    {
+        this.magnitude = magnitude;
+        this.base = base;
     }
 
     /**
      * Can 'this' be represented as an int value?
      */
     public boolean canBeRepresentedInInteger() {
-        // Add missing code here.
-
+        if( base > 27 || base < 1)
+        {
+            return false;
+        }
+        if(!isAllUpperCase(magnitude))
+        {
+            return false;
+        }
+        return true;
     }
+
 
     /**
      * Return the value of 'this' integer in decimal.
      * Throw IllegalStateException if 'this' is too large to be represented as an int value.
      */
     public int toInteger(){
-        if(!canBeRepresentedInInteger())
-            throw new IllegalStateException();
 
-        // Add missing code here.
+        
 
     }
 
@@ -84,8 +89,7 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the comparison.
      */
     public int compare(BaseNIntegerUnsigned other){
-        if(other == null || getBase() != other.getBase())
-            throw new IllegalArgumentException();
+  
 
         // Add missing code here.
 
@@ -99,8 +103,7 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the calculation.
      */
     public BaseNIntegerUnsigned add(BaseNIntegerUnsigned other){
-        if(other == null || getBase() != other.getBase())
-            throw new IllegalArgumentException();
+
 
         // Add missing code here.
 
@@ -115,8 +118,7 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the calculation.
      */
     public BaseNIntegerUnsigned subtract(BaseNIntegerUnsigned other) {
-        if (other == null || getBase() != other.getBase() || compare(other) < 0)
-            throw new IllegalArgumentException();
+
 
         // Add missing code here.
 
