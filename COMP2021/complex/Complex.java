@@ -1,58 +1,53 @@
 package hk.edu.polyu.comp.comp2021.assignment1.complex;
 
+
 public class Complex {
 
     // Task 4: add the missing fields
-
+    private Rational real;
+    private Rational imag;
 
 
     // Task 5: Complete the constructor as well as the methods add, subtract, multiply, divide, and toString.
     public Complex(Rational real, Rational imag) {
-        // Todo: complete the constructor
-
-
+        this.real = real;
+        this.imag = imag;
     }
 
 
     public Complex add(Complex other) {
-        // Todo: complete the method
-
-
+        Rational r = this.real.add(other.real);
+        Rational i = this.imag.add(other.imag);
+        return new Complex(r,i);
     }
 
     public Complex subtract(Complex other) {
-        // Todo: complete the method
-
-
-
+        Rational r = this.real.subtract(other.real);
+        Rational i = this.imag.subtract(other.imag);
+        return new Complex(r, i);
     }
 
     public Complex multiply(Complex other) {
-        // Todo: complete the method
+        Rational r = this.real.multiply(other.real);
+        Rational i = this.imag.multiply(other.imag);
+        return new Complex(r, i);
 
 
     }
 
     public Complex divide(Complex other) {
-        // Todo: complete the method
-        // you may assume 'other' is never equal to '0+/-0i'.
-
-
-
+        Rational r = this.real.divide(other.real);
+        Rational i = this.imag.divide(other.imag);
+        return new Complex(r, i);
     }
 
     public void simplify() {
-        // Todo: complete the method
-
-
-
+        this.real.simplify();
+        this.imag.simplify();
     }
 
     public String toString() {
-        // Todo: complete the method
-
-
-
+        return "(" + this.real.toString() + "/" +this.imag.toString() + ")";
     }
 
     // =========================== Do not change the methods below

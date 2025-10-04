@@ -1,6 +1,5 @@
-import java.util.Stack;
-public class valid {
-    public static boolean isValid(String s) {
+public class Valid {
+    public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         java.util.Map<Character, Character> closeToOpen = new java.util.HashMap<>();
         closeToOpen.put(')', '(');
@@ -19,9 +18,5 @@ public class valid {
             }
         }
         return stack.isEmpty();
-    }
-    public static void main(String[] args) {
-        String s = "{([])}";
-        System.out.println(isValid(s));
     }
 }

@@ -1,5 +1,5 @@
 package hk.edu.polyu.comp.comp2021.assignment1.baseN;
-
+//didn't deal with all throwillegal statement,line 48, wtf means by not convert it to int at compare add and subtract?
 public class BaseNIntegerUnsigned {
 
     // Task 1: add missing code to the methods as instructed.
@@ -32,7 +32,7 @@ public class BaseNIntegerUnsigned {
      * Instantiate an NBasedIntegerUnsigned. Throws IllegalArgumentException if 'base' or 'magnitude' is invalid.
      */
     public BaseNIntegerUnsigned(String magnitude, int base) 
-    {
+    {   
         this.magnitude = magnitude;
         this.base = base;
     }
@@ -41,15 +41,22 @@ public class BaseNIntegerUnsigned {
      * Can 'this' be represented as an int value?
      */
     public boolean canBeRepresentedInInteger() {
-        if( base > 27 || base < 1)
+        if( base > 27 && base < 1)
         {
             return false;
         }
-        if(!isAllUpperCase(magnitude))
+        if ( this.magnitude== null || this.magnitude.isEmpty()) {
+        return false;
+    }
+        for (int i = 0; i < this.magnitude.length(); i++) 
         {
-            return false;
+            char c = this.magnitude.charAt(i);
+            if (!Character.isUpperCase(c))
+            {
+                return false;
+            }
         }
-        return true;
+        return isValidMagnitude(magnitude, base);
     }
 
 
@@ -58,7 +65,15 @@ public class BaseNIntegerUnsigned {
      * Throw IllegalStateException if 'this' is too large to be represented as an int value.
      */
     public int toInteger(){
-
+        int n = magnitude.length();
+        int sum = 0;
+        for(int i = 0; i < n; i++)
+        {
+            char c = magnitude.charAt(i);
+            int number = (int)Math.pow(c - 65, n - i - 1);
+            sum += number;
+        }
+        return sum;
         
 
     }
@@ -68,7 +83,10 @@ public class BaseNIntegerUnsigned {
      */
     public String toString(){
         // Add missing code here.
-
+        String ans = magnitude;
+        char b = (char)base;
+        ans += b ;
+        return ans;
     }
 
     /**
@@ -76,8 +94,7 @@ public class BaseNIntegerUnsigned {
      * and 'magnitude'. Otherwise return false.
      */
     public boolean equals(Object other){
-        // Add missing code here.
-
+        return other instanceof BaseNIntegerUnsigned;
     }
 
     /**
@@ -89,10 +106,9 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the comparison.
      */
     public int compare(BaseNIntegerUnsigned other){
-  
-
-        // Add missing code here.
-
+        int t = this.toInteger();
+        int o = other.toInteger();
+        return t - o; 
     }
 
     /**
@@ -103,9 +119,16 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the calculation.
      */
     public BaseNIntegerUnsigned add(BaseNIntegerUnsigned other){
-
-
-        // Add missing code here.
+        String ans = "";
+        for(int i = 0; i < Math.min(this.magnitude.length(),other.magnitude.length());i++)
+        {
+            char t = this.magnitude.charAt(i);
+            char o = other.magnitude.charAt(i);
+            char a = (char)(t + o - 'A');
+            ans += a;
+        } 
+        BaseNIntegerUnsigned  res = new BaseNIntegerUnsigned(ans,this.base);
+        return res;  
 
     }
 
@@ -118,9 +141,16 @@ public class BaseNIntegerUnsigned {
      *       so neither of them should be converted to 'int' during the calculation.
      */
     public BaseNIntegerUnsigned subtract(BaseNIntegerUnsigned other) {
-
-
-        // Add missing code here.
+        String ans = "";
+        for(int i = 0; i < Math.min(this.magnitude.length(),other.magnitude.length());i++)
+        {
+            char t = this.magnitude.charAt(i);
+            char o = other.magnitude.charAt(i);
+            char a = (char)(t - o + 'A');
+            ans += a;
+        } 
+        BaseNIntegerUnsigned  res = new BaseNIntegerUnsigned(ans,this.base);
+        return res;  
 
     }
 
@@ -223,17 +253,11 @@ public class BaseNIntegerUnsigned {
      * that are valid for the base.
      */
     public static boolean isValidMagnitude(String magnitude, int base){
-        if(!isValidBase(base) || magnitude == null || magnitude.isEmpty())
-            return false;
-
         // Add missing code here.
 
+        return !(!isValidBase(base) || magnitude == null || magnitude.isEmpty());
     }
 
-    /**
-     * Return the simplified magnitude string by removing unnecessary leading zeros, i.e., DIGIT_ZEROs,
-     * from 'magnitudeStr'.
-     */
     public static String withoutLeadingZeroes(String magnitudeStr){
         assert(magnitudeStr != null && !magnitudeStr.isEmpty());
 

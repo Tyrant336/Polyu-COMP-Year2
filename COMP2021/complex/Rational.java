@@ -3,52 +3,50 @@ package hk.edu.polyu.comp.comp2021.assignment1.complex;
 public class Rational {
 
     // Task 2: add the missing fields
-
-
+    private int numerator;
+    private int denominator;
 
     // Task 3: 	Complete the constructor and
     // the methods add, subtract, multiply, divide, simplify, and toString.
 
     public Rational(int numerator, int denominator){
-        // Todo: complete the constructor
-
-
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     public Rational add(Rational other){
-        // Todo: complete the method
-
-
+        int resultn = (this.numerator * other.denominator) + (other.numerator * this.denominator);
+        int resultd = this.denominator * other.denominator;
+        return new Rational(resultn, resultd);
     }
 
     public Rational subtract(Rational other){
-        // Todo: complete the method
-
-
+        int resultn = (this.numerator * other.denominator) - (other.numerator * this.denominator);
+        int resultd = this.denominator * other.denominator;
+        return new Rational(resultn, resultd);
     }
 
     public Rational multiply(Rational other){
-        // Todo: complete the method
-
+        int resultn = (this.numerator * other.numerator);
+        int resultd = this.denominator * other.denominator;
+        return new Rational(resultn, resultd);
     }
 
     public Rational divide(Rational other){
-        // Todo: complete the method
-
-
+        int resultn = (this.numerator * other.denominator);
+        int resultd = this.denominator * other.numerator;
+        return new Rational(resultn, resultd);
     }
 
     public String toString(){
-        // Todo: complete the method
-
-
+       return (Integer.toString(this.numerator) +'/' + Integer.toString(this.denominator));
     }
 
     public void simplify(){
-        // Todo: complete the method
-
-
-
+        int gcd =  gcd(this.numerator, this.denominator);
+    
+        this.numerator = this.numerator  / gcd;
+        this.denominator =  this.denominator / gcd;
     }
 
     // ========================================== Do not change the methods below.
