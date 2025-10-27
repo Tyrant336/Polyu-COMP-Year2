@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 public class reverselinkedlist {
     class Node 
     {
@@ -10,6 +12,17 @@ public class reverselinkedlist {
             this.next = null;
         }
     }
-    Node head = 
+    public void add(Node head) {
+       Node cur = head;
+       if (head == null) {
+           head = cur;
+       } else {
+           Node current = head;
+           while (current.next != null) {
+               current = current.next;
+           }
+           current.next = newNode;
+       }
+   }
     
 }

@@ -1,313 +1,409 @@
-package hk.edu.polyu.comp.comp2021.assignment1.baseN;
-//didn't deal with all throwillegal statement,line 48, wtf means by not convert it to int at compare add and subtract?
-public class BaseNIntegerUnsigned {
+package comp2011.a1;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-    // Task 1: add missing code to the methods as instructed.
+/**
+ * Elementary tasks on arrays and running-time analysis.
+ *
+ * All submissions will be released on Blackboard, so please double check that you submission contains no identification information.
+ *
+ * Please do not modify the signatures of the methods.
+ */
 
-    /**
-     * Magnitude of the integer in String. 'magnitude' should always be valid w.r.t. 'base', and it should never
-     * contain unnecessary leading zeros, i.e., DIGIT_ZEROs.
-     */
-    private final String magnitude;
-
-    /** Base of the integer. Only valid base values are allowed. */
-    private final int base;
-
-    /**
-     * Return the base of the integer.
-     */
-    public int getBase() {
-        return base;
-    }
+public class SimpleArray_333{ // Please replace 000 with your secret number!
 
     /**
-     * Return the magnitude of the integer.
+     * VERY IMPORTANT.
+     *
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: Best cuse time is O(1), Worst case time si O(n).  
      */
-    public String getMagnitude() {
-        return magnitude;
-    }
-
-
-    /**
-     * Instantiate an NBasedIntegerUnsigned. Throws IllegalArgumentException if 'base' or 'magnitude' is invalid.
-     */
-    public BaseNIntegerUnsigned(String magnitude, int base) 
-    {   
-        this.magnitude = magnitude;
-        this.base = base;
-    }
-
-    /**
-     * Can 'this' be represented as an int value?
-     */
-    public boolean canBeRepresentedInInteger() {
-        if( base > 27 && base < 1)
+    public static int q1(int a[]) {
+        Map<Integer,Integer> dict = new HashMap<>();
+        for(int i = 0; i < a.length; i++)
         {
-            return false;
-        }
-        if ( this.magnitude== null || this.magnitude.isEmpty()) {
-        return false;
-    }
-        for (int i = 0; i < this.magnitude.length(); i++) 
-        {
-            char c = this.magnitude.charAt(i);
-            if (!Character.isUpperCase(c))
+            int val = a[i];
+            if(dict.containsKey(val))
             {
-                return false;
+                int freq = dict.get(val) + 1;
+                if (freq >= 3)
+                {
+                    return i;
+                }
+                else
+                {
+                    dict.put(val,freq);
+                }
+            }
+            else
+            {
+                dict.put(val,1);
             }
         }
-        return isValidMagnitude(magnitude, base);
+        return -1;
     }
 
-
     /**
-     * Return the value of 'this' integer in decimal.
-     * Throw IllegalStateException if 'this' is too large to be represented as an int value.
+     * VERY IMPORTANT.
+     *
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: Worst time O(n) and best time is O(n), where n is length of the array.  
      */
-    public int toInteger(){
-        int n = magnitude.length();
-        int sum = 0;
-        for(int i = 0; i < n; i++)
+    public static int q2(int a[]) {
+        Map<Integer,Integer> dict = new HashMap<>();
+        Map<Integer,Integer> ans = new HashMap<>();
+        for(int i = 0; i < a.length; i++)
         {
-            char c = magnitude.charAt(i);
-            int number = (int)Math.pow(c - 65, n - i - 1);
-            sum += number;
+            int val = a[i];
+            if(dict.containsKey(val))
+            {
+                int freq = dict.get(val) + 1;
+                if (freq == 3)
+                {
+                    ans.put(val,i);
+                }
+                else if (freq > 3 && ans.containsKey(val))
+                {
+                    ans.remove(val);
+                }
+                else
+                {
+                    dict.put(val,freq);
+                }
+            }
+            else
+            {
+                dict.put(val,1);
+            }
         }
-        return sum;
-        
-
-    }
-
-    /**
-     * Return the String representation of 'this' in the format "magnitude(base)".
-     */
-    public String toString(){
-        // Add missing code here.
-        String ans = magnitude;
-        char b = (char)base;
-        ans += b ;
-        return ans;
-    }
-
-    /**
-     * Return true if 'this' and 'other' are both of type 'BaseNIntegerUnsigned' and they have equivalent 'base'
-     * and 'magnitude'. Otherwise return false.
-     */
-    public boolean equals(Object other){
-        return other instanceof BaseNIntegerUnsigned;
-    }
-
-    /**
-     * Return an integer value to indicate the relation between 'this' and 'other'. The value should be 1) positive if
-     * 'this' is greater than 'other', 2) zero if 'this' is equal to 'other', and 3) negative if 'this' is smaller
-     * than 'other'. Throw IllegalArgumentException if 'other' is null or 'this' and 'other' have different bases.
-     *
-     * Note: Both 'this' and 'other' may not be representable as 'int' values,
-     *       so neither of them should be converted to 'int' during the comparison.
-     */
-    public int compare(BaseNIntegerUnsigned other){
-        int t = this.toInteger();
-        int o = other.toInteger();
-        return t - o; 
-    }
-
-    /**
-     * Return the sum of 'this' and 'other'. The result integer should have the same base as 'this'.
-     * Throw IllegalArgumentException if 'other' is null or 'this' and 'other' have different bases.
-     *
-     * Note: Both 'this' and 'other' may not be representable as 'int' values,
-     *       so neither of them should be converted to 'int' during the calculation.
-     */
-    public BaseNIntegerUnsigned add(BaseNIntegerUnsigned other){
-        String ans = "";
-        for(int i = 0; i < Math.min(this.magnitude.length(),other.magnitude.length());i++)
+        if (! ans.isEmpty())
         {
-            char t = this.magnitude.charAt(i);
-            char o = other.magnitude.charAt(i);
-            char a = (char)(t + o - 'A');
-            ans += a;
-        } 
-        BaseNIntegerUnsigned  res = new BaseNIntegerUnsigned(ans,this.base);
-        return res;  
-
+            int min = a.length;
+            for (int i : ans.values())
+            {
+                if (i < min)
+                {
+                    min = i;
+                }
+            }
+            return min;
+        }
+        return -1;
     }
 
     /**
-     * Return the result of subtracting 'other' from 'this'. The result integer should have the same base as 'this'.
-     * Throw IllegalArgumentException if 1) 'other' is null, 2) 'this' and 'other' have different bases, or
-     * 3) 'this' is smaller than 'other'.
+     * VERY IMPORTANT.
      *
-     * Note: Both 'this' and 'other' may not be representable as 'int' values,
-     *       so neither of them should be converted to 'int' during the calculation.
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: O(   ).  
      */
-    public BaseNIntegerUnsigned subtract(BaseNIntegerUnsigned other) {
-        String ans = "";
-        for(int i = 0; i < Math.min(this.magnitude.length(),other.magnitude.length());i++)
+    public static int q3(int[] a) {
+        return -1;
+    }
+
+    /**
+     * VERY IMPORTANT.
+     *
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: O(   ).  
+     */
+    public static int q4(int[] a) {
+        return -1;
+    }
+
+    /**
+     * VERY IMPORTANT.
+     *
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1. Neetcode
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: Best time is O( 1  ), Worst is O(logn).  
+     */
+    public static int q5(int[] a) {
+        int l = 0, r = a.length - 1;
+        while(l <= r)
         {
-            char t = this.magnitude.charAt(i);
-            char o = other.magnitude.charAt(i);
-            char a = (char)(t - o + 'A');
-            ans += a;
-        } 
-        BaseNIntegerUnsigned  res = new BaseNIntegerUnsigned(ans,this.base);
-        return res;  
-
-    }
-
-    //==================================================================================== Private members
-
-    /**
-     * Return the number of positions, which is the same as the number of digits, in the 'magnitude' of 'this'.
-     *
-     * For example, magnitudes "BA" and "CBA" in base 6 have 2 and 3 positions, respectively.
-     */
-    private int getNumberOfPositions(){
-        return getMagnitude().length();
-    }
-
-    /**
-     * Return the value of the digit at position 'pos'.
-     * 'pos' should be non-negative. Return 0 if 'pos' is greater than the maximum position.
-     *
-     * For example, given magnitude "GECA" in base 9, the digits at positions 1, 3, and 5 are 'C', 'G', and 'A', and
-     * their values are 2, 6, and 0, respectively.
-     */
-    private int getValueAtPosition(int pos){
-        assert(pos >= 0);
-
-        char digit;
-        if(pos >= getNumberOfPositions())
-            digit = DIGIT_ZERO;
-        else
-            digit = getMagnitude().charAt(getNumberOfPositions() - 1 - pos);
-
-        return getValueFromDigit(digit, getBase());
-    }
-
-    //======================================================================================== Static members
-
-    public static final int BASE_MINIMUM = 2;
-    public static final int BASE_MAXIMUM = 26;
-    public static final char DIGIT_ZERO = 'A';
-
-    /**
-     * The largest BaseNIntegerUnsigned objects that can be represented as int values.
-     */
-    private static final BaseNIntegerUnsigned[] MAX_VALUE_BASE_N;
-
-    static{
-        // To initialize MAX_VALUE_BASE_N.
-        MAX_VALUE_BASE_N = new BaseNIntegerUnsigned[27];
-        int maxInt = Integer.MAX_VALUE;
-        for(int base = BASE_MINIMUM ; base <= BASE_MAXIMUM ; base++ ){
-            MAX_VALUE_BASE_N [base] = new BaseNIntegerUnsigned(encode(maxInt, base), base);
+            int ans = (l + r) / 2;
+            if (a[ans] - ans < 0)
+            {
+                l = ans + 1;
+            }
+            else if (a[ans] - ans > 0)
+            {
+                r = ans - 1;
+            }
+            else
+            {
+                return ans;
+            }
         }
+        return -1;
     }
 
     /**
-     * Return the BaseNIntegerUnsigned object with 'base' that represents Integer.MAX_VALUE.
+     * VERY IMPORTANT.
      *
-     * For example, the object will be "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB(2)", i.e., 31 ones, when base is 2.
-     */
-    public static BaseNIntegerUnsigned getMaximum(int base){
-        if(!isValidBase(base))
-            throw new IllegalArgumentException();
-
-        return MAX_VALUE_BASE_N [base];
-    }
-
-    /**
-     * Return the encoding of 'value' in 'base'.
+     * I've sought help from the following GenAI:
+     *     1. deepseek
+     *     2.
+     *     3.
+     *     ...
      *
-     * For example, 16 will encoded as "BAAAA" when base is 2 and "DB" when base is 5.
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: Best or Worst is still O( n ).  
      */
-    public static String encode(int value, int base){
-        if(value < 0 || !isValidBase(base))
-            throw new IllegalArgumentException();
-
-        if(value == 0)
-            return DIGIT_ZERO + "";
-
-        StringBuilder builder = new StringBuilder();
-        int quotient = value;
-        int remainder = 0;
-        while(quotient != 0){
-            remainder = quotient % base;
-            quotient /= base;
-            char digit = getDigitFromValue(remainder, base);
-            builder.insert(0, digit);
+    public static int[] q6(int[] a1, int[] a2) {
+        int n = a1.length;
+        int[] temp = new int[n];
+        int a = 0;
+        int i = 0, j = 0;
+       
+        while (i < n && j < n)
+        {
+            if (a1[i] == a2[j])
+            {
+                temp[a++] = a1[i];
+                i++;
+                j++;
+            }
+            else if (a1[i] < a2[j])
+            {
+                i++;
+            }
+            else
+            {
+                j++;
+            }
         }
-        return builder.toString();
-    }
-
-    /**
-     * Return true if 'base' is between BASE_MINIMUM and BASE_MAXIMUM (both inclusive); Otherwise, return false.
-     */
-    public static boolean isValidBase(int base){
-        return BASE_MINIMUM <= base && base <= BASE_MAXIMUM;
-    }
-
-    /**
-     * Return true if 'base' is valid and 'magnitude' is valid for 'base'.
-     * 'magnitude' is valid for 'base' if 1) it is not null, 2) it is not empty, and 3) it contains only digits
-     * that are valid for the base.
-     */
-    public static boolean isValidMagnitude(String magnitude, int base){
-        // Add missing code here.
-
-        return !(!isValidBase(base) || magnitude == null || magnitude.isEmpty());
-    }
-
-    public static String withoutLeadingZeroes(String magnitudeStr){
-        assert(magnitudeStr != null && !magnitudeStr.isEmpty());
-
-        int pos = 0;
-        for(; pos < magnitudeStr.length(); pos++){
-            if(magnitudeStr.charAt(pos) != DIGIT_ZERO)
-                break;
+       
+        int[] result = new int[a];
+        if(a1.length > 0)
+        {
+            for (int k = 0; k < a; k++)
+            {
+                result[k] = temp[k];
+            }
+            return result;
         }
-        if(pos < magnitudeStr.length())
-            return magnitudeStr.substring(pos);
-        else
-            return DIGIT_ZERO + "";
+        return null;
     }
 
     /**
-     * Return the largest digit allowed by 'base'. Throw IllegalArgumentException if 'base' is invalid.
+     * VERY IMPORTANT.
      *
-     * For example, the largest digits for base 4 and 6 are 'D' and 'F', respectively.
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: worst time is O( Math.pow(n,2) ), best time is O(1).  
      */
-    public static char getLargestDigit(int base){
-        if(!isValidBase(base))
-            throw new IllegalArgumentException();
-
-        return (char)(DIGIT_ZERO + base - 1);
+    public static int q7(int[] a) {
+        java.util.Arrays.sort(a);
+        int j = a.length;
+        for(int k = 0; k < j; k++)
+        {
+            int l = k, r = j;
+            while(l <= r)
+            {
+                if (a[k]== a[l] + a[r])
+                {
+                    return k;
+                }
+                else if (a[k] > a[l]+ a[r])
+                {
+                    l++;
+                }
+                else
+                {
+                    r--;
+                }
+            }
+        }
+        return -1;
     }
 
     /**
-     * Return the digit in 'base' with the specified 'value'. Throw IllegalArgumentException if 'base' is invalid or
-     * 'value' cannot be represented using a single digit in 'base'.
+     * VERY IMPORTANT.
      *
-     * For example, value 3 is represented using digit 'D' in base 5.
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: O( nlogn  ).  
      */
-    public static char getDigitFromValue(int value, int base){
-        if(!isValidBase(base) || value < 0 || value >= base)
-            throw new IllegalArgumentException();
-
-        return (char)(DIGIT_ZERO + value);
-    }
+    public static int q8(int[] a) {
+        if (a.length == 0) return -1;
+        java.util.Arrays.sort(a);
+        int minDiff = a[1] - a[0];
+        for (int i = 2; i < a.length; i++)
+        {
+            minDiff = Math.min(minDiff, Math.abs(a[i] - a[i - 1]));
+        }
+        return minDiff; // the correct answer must be nonnegative.
+    }  
 
     /**
-     * Return the value of 'digit' in 'base'. Throw IllegalArgumentException if 'base' is invalid or 'digit' is not
-     * a valid digit for 'base'.
+     * VERY IMPORTANT.
      *
-     * For example, digit 'C' in base 6 has value 2.
+     * I've sought help from the following GenAI:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've discussed this question with the following students (secret numbers, not names!):
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * I've sought help from the following Internet resources and books:
+     *     1.
+     *     2.
+     *     3.
+     *     ...
+     *
+     * Running time: O(   ).  
      */
-    public static int getValueFromDigit(char digit, int base){
-        if(!isValidBase(base) || digit < DIGIT_ZERO || digit > getLargestDigit(base))
-            throw new IllegalArgumentException();
-
-        return digit - DIGIT_ZERO;
+    public static int q9(int[] a) {
+        if (a.length == 0) return -1;
+        java.util.Arrays.sort(a);
+        int minDiff = a[1] - a[0];
+        for (int i = 2; i < a.length; i++)
+        {
+            minDiff = Math.max(minDiff, Math.abs(a[i] - a[i - 1]));
+        }
+        return minDiff; // the correct answer must be nonnegative.
     }
 
+    /*
+     * You can use any Java library here for testing.
+     * Please perform extensive testing.
+     */
+    public static void main(String[] args) {
+    }
 }
+
