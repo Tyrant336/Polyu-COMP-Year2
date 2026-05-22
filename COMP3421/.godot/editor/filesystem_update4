@@ -1,0 +1,8 @@
+res://scripts/player.gd
+res://scripts/zone_layout.gd
+res://scripts/talkable_npc.gd
+res://scripts/dialogue_ui.gd
+res://scripts/http_interact_zone.gd
+res://scripts/http_popup_ui.gd
+res://scripts/chat_ui.gd
+res://scripts/startup_ui.gd

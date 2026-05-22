@@ -1,0 +1,9 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1779415111
+16x16 Run-Sheet.png::CompressedTexture2D::5638184555479136532::1779415016::1779415111::1::::<><><>0<>0<>4c8f03e6f0a72a98a8a52a0799c45b58<>res://.godot/imported/16x16 Run-Sheet.png-3531be1862d3c9717c561bdefadbe54c.ctex::
+16x16 Walk-Sheet.png::CompressedTexture2D::3730684161618811336::1779415059::1779415546::1::::<><><>0<>0<>319f0e402323237bd4a005b0817e3ef8<>res://.godot/imported/16x16 Walk-Sheet.png-4d6f5a0e507a1f7e651751b7401308ab.ctex::
+ReadMe.txt::TextFile::-1::1779415541::0::1::::<><><>0<>0<><>::
+::res://scenes/::1779378353
+main.tscn::PackedScene::7041190684367115509::1779415534::0::1::::<><><>0<>0<><>::res://scripts/player.gd
+::res://scripts/::1779378475
+player.gd::GDScript::4876384899771901927::1779415536::0::1::::<>CharacterBody2D<><>0<>0<><>::

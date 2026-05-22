@@ -1,0 +1,5 @@
+GET /example HTTP/1.1
+Host: example
+Content-Type: text/plain
+
+example
