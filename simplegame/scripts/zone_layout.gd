@@ -152,7 +152,7 @@ func _build_office_computer(office: Node2D) -> void:
 	pc.position = Vector2(120, -30)
 	pc.set("zone_label", "Computer")
 	pc.set("open_mode", 1)
-	pc.set("http_file_path", "res://example.http")
+	pc.set("http_file_path", "res://assets/example.http")
 	office.add_child(pc)
 
 

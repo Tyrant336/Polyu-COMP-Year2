@@ -3,7 +3,7 @@ class_name HttpPopupUI
 
 static var instance
 
-const DEFAULT_HTTP_PATH := "res://example.http"
+const DEFAULT_HTTP_PATH := "res://assets/example.http"
 
 @onready var _panel: PanelContainer = $Panel
 @onready var _title_label: Label = $Panel/Margin/VBox/TitleLabel

@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Ground WASD"
+config/name="simplegame"
 run/main_scene="res://scenes/startup.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 

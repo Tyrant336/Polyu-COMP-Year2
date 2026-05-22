@@ -7,7 +7,7 @@ extends CharacterBody2D
 const FRAME_SIZE := Vector2i(24, 24)
 const BASE_COLLISION_SIZE := Vector2(14, 10)
 const BASE_COLLISION_OFFSET_Y := 8.0
-const WALK_TEXTURE := preload("res://16x16 Walk-Sheet.png")
+const WALK_TEXTURE := preload("res://assets/16x16 Walk-Sheet.png")
 
 const ANIM_DOWN := "walk_down"
 const ANIM_DOWN_RIGHT := "walk_down_right"

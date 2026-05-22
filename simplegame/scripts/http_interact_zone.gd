@@ -4,7 +4,7 @@ enum OpenMode { OPEN_FOLDER, OPEN_EXAMPLE }
 
 @export var zone_label: String = "Computer"
 @export var open_mode: OpenMode = OpenMode.OPEN_FOLDER
-@export var http_file_path: String = "res://example.http"
+@export var http_file_path: String = "res://assets/example.http"
 @export var folder_path: String = ""
 @export var interact_radius: float = 72.0
 

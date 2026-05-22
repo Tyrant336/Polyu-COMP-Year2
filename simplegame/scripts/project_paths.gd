@@ -1,7 +1,7 @@
 class_name ProjectPaths
 extends RefCounted
 
-const EXAMPLE_HTTP := "res://example.http"
+const EXAMPLE_HTTP := "res://assets/example.http"
 
 
 static func resolve_exact_folder(folder: String = "") -> String:

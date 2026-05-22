@@ -4,7 +4,7 @@ extends RefCounted
 ## Single-frame sprites from the walk sheet (5 rows x 4 columns, 24x24 each).
 
 const FRAME_SIZE := Vector2i(24, 24)
-const TEXTURE := preload("res://16x16 Walk-Sheet.png")
+const TEXTURE := preload("res://assets/16x16 Walk-Sheet.png")
 
 enum Facing {
 	DOWN,
